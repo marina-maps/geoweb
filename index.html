@@ -7,42 +7,58 @@
   <meta name="description" content="descripción página">
   <meta name="robots" content="index,follow">
   <style>
-    .container {background-color: 569679; font-family: 'calibri'; left: 50px; top: 50px;
-    }
+    .container {font-family: 'calibri';}
+    .header {height:100px; text-align:center; background-color: #FFB674;}
+    .header h2{padding:20px; font-family: "Times New Roman", Times, serif; font-size: 60px; letter-spacing: 1px;
+      word-spacing: 2.8px; color: #0577D0; font-weight: 700; text-decoration: none; }
+    .wrapper {width: 800px; margin:auto;}
+    .wrapper a {color:blue}
+    .caja {border: 6px solid #926E79; padding:10px; margin-top:25px;}
+    .caja:hover {border: 6px solid #926E79; padding:10px; margin-top:25px; background-color: crimson;}
+
 
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Mis mapas del módulo M2B</h2>
-    <h4>Leaflet</h4>
-    <ul>
-      <li><a href="leaflet-basico.html" target="_blank">Leaflet básico</a></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <hr />
-    <h4>MapBoxGL JS</h4>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <hr />
-    <h4>KeplerGL</h4>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <hr />
-    <h4>Prácticas</h4>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <hr />
+    <div class="header">
+      <h2>Mis mapas del módulo M2B</h2>
+    </div>
+    <div class="wrapper">
+      <div class="caja">
+        <h4>Leaflet</h4>
+        <ul>
+          <li><a href="leaflet-basico.html" target="_blank">Leaflet básico</a></li>
+          <li><a href="leaflet-controles.html" target="_blank">Controles capas y escala gráfica</a></li>
+          <li><a href="leaflet-provider.html" target="_blank">Leaflet capas base</a></li>
+          <li><a href="mapa-base.html" target="_blank">Ejemplo capas agrupadas y css y js externo</a></li>
+        </ul>
+      </div>
+      <div class="caja">
+        <h4>MapBoxGL JS</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="caja">
+        <h4>KeplerGL</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="caja">
+        <h4>Prácticas</h4>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
 </html>
