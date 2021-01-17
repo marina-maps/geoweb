@@ -1,0 +1,73 @@
+<html lang="es">
+    <head>
+        <title>Leaflet básico</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="author" content="autor"/>
+      <meta name="description" content="descripción página">
+      <meta name="robots" content="index,follow">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script>
+        var map,capa1;
+        function init(){
+            map = L.map("map",{
+            center:[41.6863, 1.8382],
+            zoom:8
+            });
+            capa1= L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+            maxZoom : 19,
+            minZoom : 1,
+            attribution : "OSM"
+            });
+            capa1.addTo(map);
+            
+            /*Crear un marker que esté por defecto abierto*/
+            var punto = L.marker([41.3954, 2.16859]);
+              punto.addTo(map);
+              punto.bindPopup('Hola punto');
+              punto.openPopup();
+
+            /*Crear un marker redondo que esté por defecto abierto*/
+            var punto2 = L.circleMarker([41.4954, 2.16859],{
+                          color: '#ffffff',
+                          fillColor: '#00ff00',
+                          fillOpacity: 0.9,
+                          radius: 8
+                          }); 
+              punto2.addTo(map);
+              punto2.bindPopup('Hola punto');
+              punto2.openPopup();
+
+            /*Crear un marker redondo al hacer clic en un punto del mapa y que nos diga sus coordenadas, no se elimina el punto*/
+            map.on('click', function (e) {
+                new L.circleMarker(e.latlng, {
+                    color: '#ffffff',
+                    fillColor: '#00ff00',
+                    fillOpacity: 0.9,
+                    radius: 8
+                }).addTo(map)
+                    .bindPopup(e.latlng.lat + "," + e.latlng.lng)
+                    .openPopup();
+            });
+          }
+        </script>
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+        }
+        #map {
+          height: 100%;
+          width: 100%;
+        }
+       </style>
+    </head>
+
+    <body onLoad="init()">
+        <div id="map">
+        </div>
+    </body>
+</html>
