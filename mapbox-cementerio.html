@@ -1,0 +1,120 @@
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Mapbox básico</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .title {
+            position: absolute;
+            z-index:50;
+            background-color:#E2E2E2;
+            padding:10px;
+        }
+        
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index:10 ;
+        }
+
+    </style>
+    <script>
+        //Añadir vuestor token y vuestro estilo
+        function init() {
+            mapboxgl.accessToken =
+                'pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                //mapbox > styles > share > copiar link web
+                //OJO!! Si hacemos cambios en este estilo des de mapbox,automaticamente se añadiran a nuestro mapa
+                style: 'mapbox://styles/marina-maps/ckk4ffyhn022n17l7f5hc6qqu',
+                center: [2.837, 41.972],
+                zoom: 17,
+                //atribution control mostra la barra inferior dreta on posa @mapbox, ...
+                attributionControl: false,
+            });
+       
+
+            //Afegir controls
+            map.addControl(new mapboxgl.AttributionControl({compact: true}));
+            map.addControl(new mapboxgl.NavigationControl());
+            //Geolcate mostra la ubicació actual del usuari.
+            map.addControl(new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            }));
+
+            //Afegir un marker (en aquest cas l'hem creat buit i hem afegit iinfo després)
+            //var marker = new mapboxgl.Marker()
+                   // .setLngLat([2.161648, 41.3977])
+                   // .setPopup(new mapboxgl.Popup().setHTML('<h3>Hola</h3>'))
+                   // .addTo(map);
+                    
+            //Afegir una capa 
+            //map.on('load', function () {
+                //Afegeix una url, tipo .ajax
+                //map.addSource("viasciclables_source", {
+                 //   type: "vector",
+                  //  url: "mapbox://marina-maps.a2jx6k7z" //poner mapbox://vuestro id
+             //   }); //fin map source
+
+                //Afegeix la capa al mapa 
+              //  map.addLayer({
+                //    id: "viasciclables",
+                //    type: "line",
+                //    source: "viasciclables_source",
+                 //   'source-layer': "vias_ciclables-8fdaxh", //poner el nombre de la capa que tiene en mapbox
+                 //   paint:{
+                  //      'line-color':"#FF4C34",
+                 //       "line-width":3
+                 //   }
+              //  });
+           // });//fin funcion map.on
+
+            //Afegir un popup al event click de la capa vias ciclables
+            //map.on('click','viasciclables',function(e){
+                //var text = "";
+                //console.info(e);
+                //for (key in e.features[0].properties){
+
+               // text += "<b>"+key+"</b>:"+e.features[0].properties[key]+"<br>";
+               // }
+               // new mapboxgl.Popup()
+                   // .setLngLat(e.lngLat)
+                    //.setHTML(text)
+                    //.addTo(map);
+
+            //    }); //fin funcion
+
+            //map.on('mouseenter', 'viasciclables', function() {
+            //map.getCanvas().style.cursor = 'pointer';                    
+            //});
+
+            //map.on('mouseleave', 'viasciclables', function() {
+            //map.getCanvas().style.cursor = '';                    
+            //});
+        
+        } //fin init 
+    </script>
+</head>
+
+<body onload="init()">
+    <div class="title">
+        <h1>PRACTICA 1: CEMENTIRI DE GIRONA</h1>
+    </div>
+    <div id="map"></div>
+</body>
+
+</html>  
