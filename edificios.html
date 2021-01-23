@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Edificios catastro</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='css/estilobase.css' rel='stylesheet' />
+    <script src='js/edificios.js'></script>
+
+    <script>
+        //Añadir vuestor token y vuestro estilo
+        var map;
+        function init() {
+            mapboxgl.accessToken =
+                'pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A';
+            map = new mapboxgl.Map({
+                container: 'map',
+                //mapbox > styles > share > copiar link web
+                //OJO!! Si hacemos cambios en este estilo des de mapbox,automaticamente se añadiran a nuestro mapa
+                style: 'mapbox://styles/marina-maps/ckk9nfnln2ifo17jua3gynj1w',
+                center: [2.16859, 41.3954],
+                zoom: 13,
+                //atribution control mostra la barra inferior dreta on posa @mapbox, ...
+                attributionControl: false,
+                //Perspectiva en grados:
+                pitch: 45,
+                //
+                hash: true
+            });
+
+            //Afegir controls
+            map.addControl(new mapboxgl.AttributionControl({ compact: true }));
+            map.addControl(new mapboxgl.NavigationControl());
+
+            map.on('load', function () {
+
+                addEdificiosCapa();
+
+
+            }); //fin onload
+
+        }//fin init 
+    </script>
+
+</head>
+
+<body onload="init()">
+    <div id="map"></div>
+</body>
+
+</html>
