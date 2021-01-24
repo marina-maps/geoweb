@@ -1,9 +1,57 @@
 body {
     margin: 0;
+    padding:0;
 }
+
+h1 { margin:0;}
 
 #map {
     height: 100%;
     width: 100%;
-    background-color: #ffffff
+    background-color: #ffffff;
+    z-index:1
+}
+
+.panelTitulo {
+    position: absolute;
+    z-index: 2;
+    left: 30%;
+    top: 10px;
+    padding: 10px;
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.panelTopIzquierda {
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    width: 200px;
+    z-index: 2;
+    background-color: rgba(255,255,255,0.9);
+    padding: 10px;
+    font-size:20px;
+    color: #333333;
+    border-radius: 5px;
+}
+
+.panelTopIzquierda label{
+    font-size:0.85em;
+    font-family: Calibri;
+}
+
+.panelTopIzquierda input{
+    cursor:pointer;
+    width: 95%;
+}
+
+#textos {
+    position: absolute;
+    width: fit-content;
+    left: 10px;
+}
+
+#toponimos {
+    margin-left: 25;
 }

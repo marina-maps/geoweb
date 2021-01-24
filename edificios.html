@@ -4,8 +4,19 @@
     <meta charset='utf-8' />
     <title>Edificios catastro</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!--enllaços mapbox-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+
+    <!--enllaços pluggin MapboxGeocoder-->
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+        type="text/css" />
+
+    <!--enllaços estil i Javascript externs-->
     <link href='css/estilobase.css' rel='stylesheet' />
     <script src='js/edificios.js'></script>
 
@@ -24,19 +35,28 @@
                 zoom: 13,
                 //atribution control mostra la barra inferior dreta on posa @mapbox, ...
                 attributionControl: false,
-                //Perspectiva en grados:
-                pitch: 45,
-                //
-                hash: true
+                pitch: 45, //Perspectiva en grados
+                hash: true //mostrar lees coordenades centrals, zoom, pitch i ns k mes a la barra http
             });
 
             //Afegir controls
-            map.addControl(new mapboxgl.AttributionControl({ compact: true }));
-            map.addControl(new mapboxgl.NavigationControl());
+            map.addControl(new mapboxgl.AttributionControl({ /*propietat1,propietat2*/ compact: true })); //info. de qui son les dades
+            map.addControl(new mapboxgl.NavigationControl()); // zoom+ zoom-
+
+            //afegir barra buscador 
+            map.addControl(
+                new MapboxGeocoder({ //buscador 
+                    accessToken: mapboxgl.accessToken,
+                    mapboxgl: mapboxgl,
+                    collapsed: true, //compactar, per defecte es falç i queda obert 
+                    bbox: [2.1066, 41.3000, 2.2536, 41.4468], //limitar les peticions de busqueda a la zona de bcn
+                    placeholder: "Buscar..." //text dins de la barra 
+                }));
 
             map.on('load', function () {
 
                 addEdificiosCapa();
+                addPopupToMapEdificios("edificios"); 
 
 
             }); //fin onload
@@ -47,7 +67,22 @@
 </head>
 
 <body onload="init()">
+
+    <div class="panelTitulo">
+        <h1> Mapa Catastro Barcelona</h1>
+    </div>
+    <div class="panelTopIzquierda">
+        <!--panel de control -->
+
+        <label id="altura">Más de 0 pisos</label>
+        <input onChange="filtrarEdificios(this.value)" id="slider" type="range" min="1" max="50" step="1" value="0" />
+        <hr>
+        <input id="textos" onChange="verTextos(this.checked)" type="checkbox" checked><label id="toponimos">Ver
+            topónimos</label>
+    </div>
+
     <div id="map"></div>
+
 </body>
 
 </html>
