@@ -15,8 +15,8 @@ function add3D() {
         'exaggeration': 1.5 //1 altura real. + de 1 exageracion.
     });
 
-    //degradado azul de fondo para que parezca + real 
-    map.addLayer({
+
+    map.addLayer({ //degradado azul de fondo para que parezca + real 
         'id': 'sky',
         'type': 'sky',
         'paint': {
@@ -28,14 +28,15 @@ function add3D() {
 
 } //fin funcion add3D
 
+
 //afegir el DEM de Catalunya de l'ICGC que té mes resolució que el de Mapbox (només serveix per catalunya)
 function add3DICGC() {
 
-    map.addSource(icgc-dem, {
+    map.addSource('icgc-dem', {
         'type': 'raster-dem',
         "tiles": [
-        "https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"
-      ],
+            "https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"
+        ],
         'tileSize': 512,
         'maxzoom': 14
     });
@@ -56,8 +57,7 @@ function add3DICGC() {
         }
     });
 
-} //fin funcion add3DICGC
-
+} //fin funcion
 
 //Checkbox para activar o desacctivar el 3D. (Con el DEM de Mapbox en este caso)
 function ver3D(valor) {
@@ -65,7 +65,7 @@ function ver3D(valor) {
     if (valor) {
 
         map.setTerrain({ //si lo de dentro esta vacio, al volver a activarlo no sabria como hacerlo
-            'source': 'mapbox-dem',
+            'source': 'icgc-dem',
             'exaggeration': 1.5
         });
 
