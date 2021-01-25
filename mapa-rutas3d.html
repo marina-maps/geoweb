@@ -40,9 +40,22 @@
              //add3D();
              add3DICGC();
              addRutas();
-
+             rotarCamara(0); //0 seria el punto de inicio de la rotacion 
             }); //fin onload
            
+            map.on("click",function(e){//el rotamiento se parará cuando el usuario haga algun clic en el mapa 
+                finalRotarCamara()
+
+                });
+            map.on("zoomstart",function(e){ //el rotamiento se parará cuando el usuario empieze a hacer zoom 
+                finalRotarCamara()
+
+                });  
+
+            map.on("zoomend",function(e){//justo después de hacer zoom la camara volverá a rotar 
+                rotarCamara(0);
+
+            });          
         } // final init
     </script>
 </head>

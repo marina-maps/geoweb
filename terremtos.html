@@ -1,0 +1,47 @@
+<html>
+    <head>
+    <meta charset='utf-8' />
+    <title>Terremotos</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!--enllaços mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+
+    <!--Enlace hoja estilo reaprovechada-->
+    <link href='css/estilobase.css' rel='stylesheet' />
+    
+    <!--Enlace js este proyecto -->
+    <script src='js/utils.js'></script> <!--En js "utils" significa que es un fichero bastante util y reaprovechable -->
+    <script src='js/terremotos.js'></script>
+
+
+    <script>
+        var map;
+        function init() {
+
+            mapboxgl.accessToken = "pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A";
+            map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/dark-v10',
+                center: [9.746, 40.473],
+                zoom: 5.5,
+                hash: true,
+                pitch: 0,
+                attributionControl: false
+            });
+            map.addControl(new mapboxgl.AttributionControl({
+                compact: true
+            }));
+            map.addControl(new mapboxgl.NavigationControl());           
+
+        } //fin init
+
+    </script>
+    </head>
+
+    <body onload="init()">
+        <div id='map'></div>
+    </body>
+
+    </html>

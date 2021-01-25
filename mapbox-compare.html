@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Comparador</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+    <!--enllaços mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    
+    <!-- Links pluggin Mapbox-compare. Los enlaces de los pluggins siempre debajo de la libreria madre!!-->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css"
+        type="text/css" />
+
+    <!--Enlace hoja estilo reaprovechada-->
+    <link href='css/estilobase.css' rel='stylesheet' />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden
+        }
+
+        .map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        //Añadir vuestor token!!
+        var map;
+        function init() {
+            mapboxgl.accessToken =
+                'pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A';
+
+
+            var mapa1 = new mapboxgl.Map({
+                container: 'mapa1', //id 
+                style: 'mapbox://styles/mapbox/satellite-v9',
+                center: [2.16859, 41.3954],
+                zoom: 13,
+                attributionControl: false,
+            });
+
+            var mapa2 = new mapboxgl.Map({
+                container: 'mapa2', //id
+                style: 'mapbox://styles/mapbox/light-v10',
+                center: [2.16859, 41.3954],
+                zoom: 13,
+                attributionControl: false,
+            });
+
+            mapa2.on('load', function () {
+                mapa2.addSource("orto1945", {
+                    type: "raster",
+                    tiles: [ //peticion WMS!! Para poner otra wms solo tendriamos que cambiar la url del servicio (hasta? creo) y el nombre de la capa. El resto dejarlo igual
+                        "https://geoserveis.icgc.cat/icc_ortohistorica/wms/service?layers=ovaa10m&bbox={bbox-epsg-3857}&format=image/png&styles=&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=512&height=512",
+                    ],
+                    tileSize: 512,
+                    maxzoom: 19,
+                    minZoom: 7.5,
+                });
+                //  ovab5m
+                mapa2.addLayer({
+                    id: "orto1945",
+                    source: "orto1945", //id source
+                    type: "raster",
+                    maxzoom: 18 
+                    //tambien podriamos poner opacity
+                });
+            })
+
+
+            var map = new mapboxgl.Compare(mapa1, mapa2, "#comparador"); //
+
+        } // final init
+    </script>
+</head>
+
+<body onload="init()">
+    <div class="panelTitulo">
+        <h1> Pluggin Mapbox-Compare</h1>
+        <p> https://github.com/mapbox/mapbox-gl-compare </p>
+        <p> Imágen izquierda: Satelite de Mapbox  </p>
+        <p> Imágen derecha: WMS Ortofoto 1945 (ICGC)  </p>
+    </div>
+    <div id="comparador"> <!--Este id une los mapas. cuando llamemos al pluggin le hemos de dar este id -->
+        <div id="mapa1" class="map"></div> <!--eL ID nos servirá para identificar el contenedor (diferentes) y el class para el estilo (iguales)-->
+        <div id="mapa2" class="map"></div>
+    </div>
+</body>
+
+</html>
