@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Topogáfico</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+    <!--enllaços mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    
+    <!--Enlace hoja estilo reaprovechada-->
+    <link href='css/estilobase.css' rel='stylesheet' />
+
+    <script>
+        function init() {
+
+            mapboxgl.accessToken ='pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'https://marina-maps.github.io/geoweb/datos/mystyle.json', //copiat directament a partir del repositori modul (descarregat a ICGC i editat amb Maputnik)
+                center: [2.16859, 41.3954],
+                zoom: 13,
+                hash: true,
+                pitch: 45,
+                attributionControl: false
+            });
+            map.addControl(new mapboxgl.AttributionControl({
+                compact: true
+            }));
+            map.addControl(new mapboxgl.NavigationControl());
+
+            map.on('load', function () { //añadir una capa directamente de nuestro directorio, sin añadir como tileset de Mapbox)
+                map.addSource("carrils-bici", {
+                    type: "geojson",
+                    data: "datos/carrils-bici.geojson"
+                }); //fin map source
+
+                map.addLayer({
+                    id: "carrils-bici-layer",
+                    type: "line",
+                    source: "carrils-bici",
+                    layout: {
+                        "line-join": "round",
+                        "line-cap": "round"
+                    },
+                    paint: {
+                        "line-color": "#FF0000",
+                        "line-width": 8
+                    }
+                }); //fin add layers
+            }); //Fin load mapa
+
+
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <div class="panelTitulo">
+        <h1> Mapa sense utilitzar Mapbox Studio </h1>
+        <p> Style: Descargado de (https://openicgc.github.io/) y editado con Maputnik </p>
+        <p> Se ha subido la url (datos/miestilo.json) en el indice del repositorio </p>
+        <p> Capa vectorial JSON añadida directamente desde directorio </p>
+        </p>
+    </div>
+    <div id='map'></div>
+</body>
+</html>
