@@ -30,7 +30,8 @@
                 container: 'map',
                 //mapbox > styles > share > copiar link web
                 //OJO!! Si hacemos cambios en este estilo des de mapbox,automaticamente se añadiran a nuestro mapa
-                style: 'mapbox://styles/marina-maps/ckk9nfnln2ifo17jua3gynj1w',
+                //style: 'mapbox://styles/marina-maps/ckk9nfnln2ifo17jua3gynj1w',
+                style:'estilo.json',
                 center: [2.16859, 41.3954],
                 zoom: 13,
                 //atribution control mostra la barra inferior dreta on posa @mapbox, ...
@@ -42,9 +43,7 @@
             //Afegir controls
             map.addControl(new mapboxgl.AttributionControl({ /*propietat1,propietat2*/ compact: true })); //info. de qui son les dades
             map.addControl(new mapboxgl.NavigationControl()); // zoom+ zoom-
-
-            //afegir barra buscador 
-            map.addControl(
+            map.addControl( //afegir barra buscador 
                 new MapboxGeocoder({ //buscador 
                     accessToken: mapboxgl.accessToken,
                     mapboxgl: mapboxgl,
@@ -56,8 +55,8 @@
             map.on('load', function () {
 
                 addEdificiosCapa();
-                addPopupToMapEdificios("edificios"); 
-
+                addPopupToMapEdificios("edificios");
+                add3D(); //si volem que sigui 3d el mapa (si el style dde fons es negre queda bastant pocho)
 
             }); //fin onload
 
@@ -74,11 +73,22 @@
     <div class="panelTopIzquierda">
         <!--panel de control -->
 
-        <label id="altura">Más de 0 pisos</label>
-        <input onChange="filtrarEdificios(this.value)" id="slider" type="range" min="1" max="50" step="1" value="0" />
+        <div class="slider"> 
+            <label id="altura">Más de 0 pisos</label>
+            <input onChange="filtrarEdificios(this.value)" id="slider" type="range" min="1" max="50" step="1" value="0" />
+        </div>
+
         <hr>
-        <input id="textos" onChange="verTextos(this.checked)" type="checkbox" checked><label id="toponimos">Ver
-            topónimos</label>
+
+        <div>
+            <input onChange="verTextos(this.checked)" type="checkbox" checked>
+            <label id="toponimos">Ver topónimos</label>
+        </div>
+
+        <div>
+            <input onChange="ver3D(this.checked)" type="checkbox" checked>
+            <label for="Mapbox">Ver 3D </label>
+        </div>
     </div>
 
     <div id="map"></div>

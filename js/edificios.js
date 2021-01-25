@@ -44,7 +44,7 @@ function addEdificiosCapa() {
             "fill-extrusion-opacity": 0.9
         }
     }
-        ,"road-label" //para que los textos aparezcan por encima de todo (depende del nombre que tengan los nombres de las carreteras en el estilo)
+        ,//"road-label" //para que los textos aparezcan por encima de todo (depende del nombre que tengan los nombres de las carreteras en el estilo)
     );
 
 } //fin funcion addEdificioscapa
@@ -133,3 +133,45 @@ function addPopupToMapEdificios(nombreCapa) {
     });
 
 }  // fin funcion addPopupToMapEdificios
+
+
+function add3D() {
+
+    map.addSource('mapbox-dem', {
+        'type': 'raster-dem',
+        'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        'tileSize': 512,
+        'maxzoom': 14,
+    });
+
+    map.setTerrain({
+        'source': 'mapbox-dem',
+        'exaggeration': 1.5 //1 altura real. + de 1 exageracion.
+    });
+
+    //degradado azul de fondo para que parezca + real 
+    map.addLayer({
+        'id': 'sky',
+        'type': 'sky',
+        'paint': {
+            'sky-type': 'atmosphere',
+            'sky-atmosphere-sun': [0.0, 0.0],
+            'sky-atmosphere-sun-intensity': 15
+        }
+    });
+
+} //fin funcion add3D
+
+function ver3D(valor) {
+
+    if (valor) {
+
+        map.setTerrain({ //si lo de dentro esta vacio, al volver a activarlo no sabria como hacerlo
+            'source': 'mapbox-dem',
+            'exaggeration': 1.5
+        });
+
+    } else {
+        map.setTerrain(null);
+    }
+}//fin funcion ver3D

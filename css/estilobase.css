@@ -36,22 +36,18 @@ h1 { margin:0;}
     border-radius: 5px;
 }
 
+.panelTopIzquierda input{
+    cursor:pointer;
+    width: fit-content;
+
+}
+
+.panelTopIzquierda .slider input{
+    width: 95%;
+
+}
+
 .panelTopIzquierda label{
     font-size:0.85em;
     font-family: Calibri;
-}
-
-.panelTopIzquierda input{
-    cursor:pointer;
-    width: 95%;
-}
-
-#textos {
-    position: absolute;
-    width: fit-content;
-    left: 10px;
-}
-
-#toponimos {
-    margin-left: 25;
 }

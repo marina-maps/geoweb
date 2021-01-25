@@ -1,0 +1,75 @@
+{
+  "version": 8,
+  "name": "terrainrgb",
+  "center": [
+    1.6440463662789853,
+    42.45612643897533
+  ],
+  "zoom": 11.178192241378023,
+  "bearing": -0.08697672230209719,
+  "pitch": 60,
+  "sources": {
+    "terrainICGC": {
+      "type": "raster-dem",
+      "tiles": [
+        "https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"
+      ],
+      "maxzoom": 16,
+      "minZoom": 7.5
+    },
+    "terrainMapZen": {
+      "type": "raster-dem",
+      "tiles": [
+        "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
+      ],
+      "tileSize": 256,
+      "encoding": "terrarium",
+      "maxzoom": 16
+    }
+  },
+  "sprite": "https://tilemaps.icgc.cat/tileserver/sprites/maki",
+  "glyphs": "https://tilemaps.icgc.cat/tileserver/glyphs/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#262826"
+      }
+    },
+    {
+      "id": "terrainMapZen",
+      "type": "hillshade",
+      "source": "terrainMapZen",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "hillshade-illumination-anchor": "map",
+        "hillshade-exaggeration": 1,
+        "hillshade-highlight-color": "#c2ecdf",
+        "hillshade-shadow-color": "#000000",
+        "hillshade-accent-color": "#8a0000",
+        "hillshade-illumination-direction": 315
+      },
+      "interactive": true
+    },
+    {
+      "id": "terrainICGC",
+      "type": "hillshade",
+      "source": "terrainICGC",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "hillshade-illumination-anchor": "map",
+        "hillshade-exaggeration": 1,
+        "hillshade-highlight-color": "#c2ecdf",
+        "hillshade-shadow-color": "#000000",
+        "hillshade-accent-color": "#8a0000",
+        "hillshade-illumination-direction": 315
+      },
+      "interactive": true
+    }
+  ]
+}
