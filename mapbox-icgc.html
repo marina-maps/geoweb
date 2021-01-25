@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Topogáfico</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+    <!--enllaços mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+    
+    <!--Enlace hoja estilo reaprovechada-->
+    <link href='css/estilobase.css' rel='stylesheet' />
+
+    <script>
+        function init() {
+
+            mapboxgl.accessToken ='pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'https://tilemaps.icgc.cat/tileserver/styles/terrain.json', //copiat directament de https://openicgc.github.io/
+                center: [2.16859, 41.3954],
+                zoom: 13,
+                hash: true,
+                pitch: 45,
+                attributionControl: false
+            });
+            map.addControl(new mapboxgl.AttributionControl({
+                compact: true
+            }));
+            map.addControl(new mapboxgl.NavigationControl());
+
+
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <div id='map'></div>
+</body>
+</html>
