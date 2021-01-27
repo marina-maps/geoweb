@@ -3,14 +3,22 @@ var fuente;
 
 function addICGC (){
     var fuente = 'icgc-dem';
+    map.setTerrain({
+        'source': fuente,
+        'exaggeration': 1.5 //1 altura real. + de 1 exageracion.
+    });
 }
 
 function addMB (){
     var fuente = 'mapbox-dem';
+    map.setTerrain({
+        'source': fuente,
+        'exaggeration': 1.5 //1 altura real. + de 1 exageracion.
+    });
 }
 
 function donothing (){
-    var fuente = 'none';
+    map.setTerrain(null);
 }
 
 function add3D() {
@@ -32,7 +40,7 @@ function add3D() {
     });
 
     map.setTerrain({
-        'source': 'fuente',
+        'source': 'mapbox-dem',
         'exaggeration': 1.5 //1 altura real. + de 1 exageracion.
     });
 
