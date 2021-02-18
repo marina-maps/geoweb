@@ -1,0 +1,103 @@
+<head>
+    <meta charset='utf-8' />
+    <title>Visor incendis forestals</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!--enllaços mapbox-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+
+    <!--enllaços pluggin MapboxGeocoder-->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css" />
+    
+    <!--Fonts titol i cos-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap" rel="stylesheet">
+
+    <!--enllaços estil i Javascript externs-->
+    <link href='css/p-final.css' rel='stylesheet' />
+    <script src='js/incendis.js'></script>
+    <script src='js/utils.js'></script>
+    <script src='js/3d-controles.js'></script>
+
+    <script>
+        //Añadir vuestor token y vuestro estilo
+        var map;
+        function init() {
+            mapboxgl.accessToken =
+                'pk.eyJ1IjoibWFyaW5hLW1hcHMiLCJhIjoiY2tqeWl6ZWNoMTJvYzJwbGNkcThlMTJrbyJ9.7xwHw4io6QOXFOxjnh7l6A';
+            map = new mapboxgl.Map({
+                container: 'map',
+                //mapbox > styles > share > copiar link web
+                //OJO!! Si hacemos cambios en este estilo des de mapbox,automaticamente se añadiran a nuestro mapa
+                //style: 'mapbox://styles/marina-maps/ckk9nfnln2ifo17jua3gynj1w',
+                style:'mapbox://styles/marina-maps/ckl40648o2o7i17tb9hrha6qn',
+                center: [2.16859, 41.3954],
+                zoom: 10,
+                //atribution control mostra la barra inferior dreta on posa @mapbox, ...
+                attributionControl: false,
+                pitch: 45, //Perspectiva en grados
+                hash: true //mostrar lees coordenades centrals, zoom, pitch i ns k mes a la barra http
+            });
+
+            //Afegir controls
+            map.addControl(new mapboxgl.AttributionControl({ /*propietat1,propietat2*/ compact: true })); //info. de qui son les dades
+            map.addControl(new mapboxgl.NavigationControl()); // zoom+ zoom-
+            map.addControl( //afegir barra buscador 
+                new MapboxGeocoder({ //buscador 
+                    accessToken: mapboxgl.accessToken,
+                    mapboxgl: mapboxgl,
+                    collapsed: true, //compactar, per defecte es falç i queda obert 
+                    bbox: [2.1066, 41.3000, 2.2536, 41.4468], //limitar les peticions de busqueda a la zona de bcn
+                    placeholder: "Buscar..." //text dins de la barra 
+                }));
+
+            map.on('load', function () {
+                addIncendis();
+                addPopupToMap("incendis");
+                add3D();
+
+            }); //fin onload
+
+        }//fin init 
+    </script>
+
+</head>
+
+<body onload="init()">
+
+    <div class="panelTitulo">
+        <h1> INCENDIS FORESTALS A CATALUNYA 1986 - 2019</h1>
+    </div>
+    <div class="panelTopIzquierda">
+        <!--panel de control -->
+
+        <div class="slider"> 
+            <label id="any"><p>Any</p></label>
+            <input onChange="filtrarEdificios(this.value)" id="slider" type="range" min="1986" max="2019" step="1" value="1986" />
+        </div>
+        <div>
+            <input id="ICGC" onclick="addICGC()" name="3d" type="radio" checked>
+            <p>3D ICGC </p>
+        </div>
+
+        <div>
+            <input id="NONE" onclick="donothing()" name="3d" type="radio">
+            <p>No ver 3D </p>
+        </div>
+
+    </div>
+
+   
+   
+    <div id="map">
+        <div class="fuente">
+            <p>Font:<a href="http://agricultura.gencat.cat/ca/serveis/cartografia-sig/bases-cartografiques/boscos/incendis-forestals/incendis-forestals-format-shp/"> Departament d’Agricultura, Ramaderia, Pesca i Alimentació</a></p>
+        </div>
+    </div>
+
+</body>
+
+</html>

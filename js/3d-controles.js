@@ -40,7 +40,7 @@ function add3D() {
     });
 
     map.setTerrain({
-        'source': 'mapbox-dem',
+        'source': 'icgc-dem',
         'exaggeration': 1.5 //1 altura real. + de 1 exageracion.
     });
 

@@ -5,9 +5,9 @@
 
  async function enviarPeticion(url) { //url: petición completa 
 
-  return fetch(url)
+  return fetch(url) 
       .then(function (response) {
-          return response.json()
+          return response.json() //Aqui obtenim el resultat i li demanem que el volem en format .json 
       })
       .then(function (data) {
           //console.log('Respuesta', data);

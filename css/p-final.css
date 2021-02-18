@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding:0;
+    height:100%
+}
+
+h1 { margin:0;}
+
+#map {
+    position:relative;
+    top:0; bottom:0;
+    width: 100%; height: 90%;
+    background-color: #ffffff;
+    z-index:1;
+    font-family: 'Poppins', sans-serif;
+}
+
+.panelTitulo {
+    position: relative;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    padding-top:2%;
+    background-color: #FF9821;
+    opacity: 0.8;
+    /*border-radius: 10px;*/
+    width: 100%;
+    text-align: center;
+    height:6%;
+    font-size: 10px;
+    font-family: 'Lexend Mega', sans-serif;
+}
+
+.panelTopIzquierda {
+    position: absolute;
+    top: 75px;
+    left: 20px;
+    width: 200px;
+    z-index: 2;
+    background-color: rgba(255,255,255,0.9);
+    padding: 10px;
+    font-size:15px;
+    color: #333333;
+    border-radius: 5px;
+    line-height: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.panelTopIzquierda label{
+    position:relative;
+    display:inline-block;
+}
+
+.panelTopIzquierda p{
+    display:inline-block;
+
+}
+
+.panelTopIzquierda input{
+    position:relative;
+    cursor:pointer;
+    width: fit-content;
+
+}
+
+.panelTopIzquierda .slider input{
+    width: 95%;
+}
+
+.fuente{
+    position: absolute;
+    bottom: 5px; right: 10px;
+    height:30px;
+    z-index:2;
+    background-color: #ffffff;
+    opacity:0.5; 
+    text-decoration: none;
+    border-radius: 5px;
+}
